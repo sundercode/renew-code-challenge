@@ -1,0 +1,22 @@
+{
+  "name": "renew-code-challenge",
+  "version": "1.0.0",
+  "description": "Renew Financial's coding challenge, by Elise Sunderland",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sundercode/renew-code-challenge.git"
+  },
+  "author": "Elise Sunderland",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sundercode/renew-code-challenge/issues"
+  },
+  "homepage": "https://github.com/sundercode/renew-code-challenge#readme",
+  "devDependencies": {
+    "react": "^15.6.1"
+  }
+}
