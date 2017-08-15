@@ -39,6 +39,7 @@
     "lucid-ui": "^2.20.0",
     "moment": "^2.18.1",
     "react-addons-css-transition-group": "^15.6.0",
+    "react-day-picker": "^6.1.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"
   }
