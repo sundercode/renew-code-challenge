@@ -37,9 +37,12 @@ const uiSchema = {
     },
 }
 
+export let lat = 0;
+export let lng = 0;
+
 const urlForGeocode = address =>
     `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyClW8MQo9G707kp0lwc5Q3YlvVNg66jR1c`
-//function to submit address forms as stringified json
+
 //This component is a validated text field for US address formats. On Submit,
 //pass this to google maps API to geocode.
 class AddressForm extends Component {
@@ -71,7 +74,6 @@ class AddressForm extends Component {
                 this.setState({
                   geocodeData: d
                 })
-                console.log(this.state.geocodeData.results)
             }, () => {
                 this.setState({
                   requestFailed: true
@@ -81,6 +83,8 @@ class AddressForm extends Component {
 
     render() {
         if (this.state.hasSubmitted && this.state.geocodeData) {
+            lat = this.state.geocodeData.results[0].geometry.location.lat;
+            lng = this.state.geocodeData.results[0].geometry.location.lng;
             return (
                 <div id="addressGroup">
                     <Form
@@ -89,7 +93,7 @@ class AddressForm extends Component {
                         uiSchema={uiSchema}
                     />
                     <p>
-                        Latitude: {this.state.geocodeData.results[0].geometry.location.lat}, 
+                        Latitude: {this.state.geocodeData.results[0].geometry.location.lat},
                         Longitude: {this.state.geocodeData.results[0].geometry.location.lng}
                     </p>
                 </div>
