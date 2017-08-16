@@ -74,6 +74,8 @@ class AddressForm extends Component {
                 this.setState({
                   geocodeData: d
                 })
+                lat = this.state.geocodeData.results[0].geometry.location.lat;
+                lng = this.state.geocodeData.results[0].geometry.location.lng;
             }, () => {
                 this.setState({
                   requestFailed: true
@@ -83,8 +85,6 @@ class AddressForm extends Component {
 
     render() {
         if (this.state.hasSubmitted && this.state.geocodeData) {
-            lat = this.state.geocodeData.results[0].geometry.location.lat;
-            lng = this.state.geocodeData.results[0].geometry.location.lng;
             return (
                 <div id="addressGroup">
                     <Form
