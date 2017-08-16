@@ -7,67 +7,106 @@ import '../styles/css/bootstrap.min.css';
 const schema = {
     title: "",
     type: "object",
-    required: ["title", "city", "state", "zip"],
+    required: ["address", "city", "state"],
     properties: {
-        title: {
+        address: {
             type: "string",
             title: "Building # and Street",
-            default: "",
         },
         city: {
             type: "string",
             title: "City",
-            default: "",
         },
         state: {
             type: "string",
             title: "State",
-            default: "",
+            maxLength: 2,
         },
-        zip: {
-            type: "number",
-            title: "Zip Code",
-            default: "",
-        }
     }
 }
 
 const uiSchema = {
-    title: {
+    address: {
         "ui:placeholder": "1234 NW Main St.",
     },
     city: {
-        "ui:placeholder": "New York City",
+        "ui:placeholder": "New York",
     },
     state: {
         "ui:placeholder": "NY",
     },
-    zip: {
-        "ui:placeholder": "10019",
-    }
 }
 
+const urlForGeocode = address =>
+    `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyClW8MQo9G707kp0lwc5Q3YlvVNg66jR1c`
 //function to submit address forms as stringified json
-function collectInput () {
-
-}
-//This component is a validated text field for US address formats
+//This component is a validated text field for US address formats. On Submit,
+//pass this to google maps API to geocode.
 class AddressForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '',
+            data: "",
+            requestFailed: false,
+            hasSubmitted: false,
+
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+    handleSubmit  = dt => {
+        const addressString = dt.formData.address + ",+"+ dt.formData.city + ",+"+ dt.formData.state;
+        this.setState({
+            hasSubmitted: true,
+        })
+        fetch(urlForGeocode(addressString))
+            .then(response => {
+                if (!response.ok) {
+                  throw Error("Network request failed")
+                }
+            //console.log(response);
+            return response;
+            })
+            .then(d => d.json())
+            .then(d => {
+                this.setState({
+                  geocodeData: d
+                })
+                console.log(this.state.geocodeData.results)
+            }, () => {
+                this.setState({
+                  requestFailed: true
+                })
+            })
+    }
+
     render() {
-        return (
-            <div id="addressGroup">
-                <Form
-                    schema={schema}
-                    uiSchema={uiSchema}
-                />
-            </div>
-        );
+        if (this.state.hasSubmitted && this.state.geocodeData) {
+            return (
+                <div id="addressGroup">
+                    <Form
+                        schema={schema}
+                        onSubmit={this.handleSubmit}
+                        uiSchema={uiSchema}
+                    />
+                    <p>
+                        Latitude: {this.state.geocodeData.results[0].geometry.location.lat}, 
+                        Longitude: {this.state.geocodeData.results[0].geometry.location.lng}
+                    </p>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div id="addressGroup">
+                    <Form
+                        schema={schema}
+                        onSubmit={this.handleSubmit}
+                        uiSchema={uiSchema}
+                    />
+                    <p>Waiting on Form Submission...</p>
+                </div>
+            );
+        }
     }
 }
 

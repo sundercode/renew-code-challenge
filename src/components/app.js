@@ -9,12 +9,12 @@ export default class App extends Component {
         return (
             <div>
                 <Panel>
-                    <Panel.Header><strong>Pick a Date Range</strong></Panel.Header>
-                    <TimeSelector />
-                </Panel>
-                <Panel>
                     <Panel.Header><strong>Enter a Valid US Address</strong></Panel.Header>
                     <AddressForm />
+                </Panel>
+                <Panel>
+                    <Panel.Header><strong>Pick a Date Range</strong></Panel.Header>
+                    <TimeSelector />
                 </Panel>
             </div>
         );
