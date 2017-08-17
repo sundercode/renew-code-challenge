@@ -16,6 +16,14 @@ function createTableData (d, sunriseResponse) {
     return _.assign({date: d}, newSunriseResponse);
 }
 
+function convertToTimestamps (dayArr) {
+    let newDays = [];
+    for (var i = 0;i <= dayArr.length; i++){
+        newDays.push(moment(dayArr[i]).unix());
+    }
+    return newDays;
+}
+
 class DateTable extends Component {
     //give default props of dates
     constructor(props) {
@@ -29,7 +37,7 @@ class DateTable extends Component {
     //get the inbetween days and call sunset api
     //https://sunrise-sunset.org/api
     componentDidMount() {
-        for (var i = 0; i < days.length; i++){
+        for (var i = 0; i <= days.length; i++){
             fetch(urlForSunrise(lat,lng, days[i]))
                 .then(response => {
                     if (!response.ok) {

@@ -2,12 +2,10 @@ import React, {Component} from "react";
 import moment from 'moment';
 import _ from 'lodash';
 import DayPicker, {DateUtils} from 'react-day-picker';
-import {SingleSelect, Button} from "lucid-ui";
+import {Button} from "lucid-ui";
 import DateTable from './DateTable';
 import 'react-day-picker/lib/style.css';
 import '../styles/css/bootstrap.min.css';
-
-const { Placeholder, Option } = SingleSelect;
 
 /*
 * This component is a time selector for the date range of the sunsets
@@ -22,11 +20,12 @@ export let days = [];
 function getDaysBetween (start, end) {
     let dates = [];
 
-    const startClone = start.clone().startOf('day');
-    const endClone = end.clone().startOf('day');
+    const startClone = start.clone();
+    const endClone = end.clone();
 
-    while(startClone.add(1, 'days').diff(endClone) < 0) {
+    while(startClone.isBefore(end) || startClone.isSame(end)) {
         dates.push(startClone.clone().format('YYYY-MM-DD'));
+        startClone.add(1, 'days');
 
     }
     return dates;
@@ -90,6 +89,7 @@ class TimeSelector extends Component {
                         From: {from && from.toLocaleDateString('en-US')},
                         To: {to && to.toLocaleDateString('en-US')}
                     </div>
+                    <p>All times are currently in UTC.</p>
                     <Button onClick={this.handleReset}>Reset Range Select</Button>
                     <DateTable />
                 </div>

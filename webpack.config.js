@@ -3,6 +3,12 @@ var webpack = require('webpack');
 module.exports = {
   context: __dirname,
   entry: "./src/index.js",
+  externals: {
+    'cheerio': 'window',
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
+  },
   module: {
 	loaders: [
 		{

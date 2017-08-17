@@ -4,7 +4,9 @@
   "description": "Renew Financial's coding challenge, by Elise Sunderland",
   "main": "src/index.js",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot"
+    "test": "mocha --compilers js:babel-register --require ./test/helpers.js --require ./test/dom.js --recursive",
+    "dev": "webpack-dev-server --inline --hot",
+    "tdd": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -26,12 +28,20 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.1",
     "css-loader": "^0.28.4",
+    "enzyme": "^2.9.1",
     "eslint": "^4.4.1",
     "eslint-config-google": "^0.9.1",
+    "jsdom": "^11.1.0",
+    "mocha": "^3.5.0",
     "react": "^15.6.1",
+    "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.6.1",
+    "react-test-renderer": "^15.6.1",
     "redux-devtools": "^3.4.0",
+    "sinon": "^3.2.1",
     "style-loader": "^0.18.2",
     "webpack": "^3.5.3",
     "webpack-dev-server": "^2.7.1"
@@ -40,6 +50,7 @@
     "lodash": "^4.17.4",
     "lucid-ui": "^2.20.0",
     "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "react-addons-css-transition-group": "^15.6.0",
     "react-day-picker": "^6.1.0",
     "react-jsonschema-form": "^0.49.0",
