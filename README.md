@@ -3,6 +3,8 @@ Renew financial's coding challenge, hooray!
 
 This is the version of the coding challenge as done by Elise Sunderland. Below are the instructions for setting this up and running it on another machine.
 
+To see the instructions for the project, please see the file `rf-code-challenge` in the repo.
+
 ##Installation Instructions
 If you are using this git repo...
 
