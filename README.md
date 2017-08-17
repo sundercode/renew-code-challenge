@@ -6,6 +6,8 @@ This is the version of the coding challenge as done by Elise Sunderland. Below a
 To see the instructions for the project, please see the file `rf-code-challenge` in the repo.
 
 ## Installation Instructions
+Please be sure that you have both Node and npm installed * https://nodejs.org/en/download/*
+
 If you are using this git repo...
 
 1. Clone this repository into the folder of your choice.
