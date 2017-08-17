@@ -18,6 +18,7 @@ describe("A suite for TimeSelector", () => {
     it("renders DateTable when 'hasSubmitted' is true", function() {
       const wrapper = shallow(<TimeSelector />);
       wrapper.setState({ hasSubmitted: true });
+      wrapper.setState({ timezoneData: {} });
       expect(wrapper.find('DateTable')).to.have.length(1);
     });
 

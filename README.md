@@ -53,3 +53,5 @@ For testing:
 
 - Currently the only way to verify valid address submissions are through the API response, so Google will estimate the location for the user
 - Timezone adjustments are not made in the displayed table, but timezone is declared at the top of the component.
+- Resetting the date range after submitting does not cause a different API request to fire. You must refresh the page to do so.
+- 
