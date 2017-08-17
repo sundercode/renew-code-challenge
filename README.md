@@ -1,62 +1,51 @@
-# renew-code-challenge
+# Renew Coding Challenge
 Renew financial's coding challenge, hooray!
 
-Renew Financial: jsCodeChallenge
-=================================
+This is the version of the coding challenge as done by Elise Sunderland. Below are the instructions for setting this up and running it on another machine.
 
-Hi there! We're ecstatic that you're interested in working for Renew Financial's dev team. To get a better idea of your current development skills, we'd like for you to complete a code challenge - build an application according to a set of requirements. The actual business requirements are listed further down, but here are the general tech requirements:
+##Installation Instructions
+If you are using this git repo...
 
-1. Create a single-page web application.
-1. Make sure your app is runnable on Mac OS X or Linux.
-1. Do not require any for-pay software.
-1. Write tests for your code.
-1. Include instructions for setting up and running your application locally (including versions for any installed software).
+1. Clone this repository into the folder of your choice.
+1. In the project directory, please be sure to use `npm install` to get all correct external packages
+1. On the command line, run `npm run dev` to start up the local server at `localhost:8080`.
 
-We currently use Angular, React/Redux, Enzyme, Jasmine, and Bootstrap but you may use any libraries or frameworks you wish.
+If you are downloading the project...
 
-Feel free to email us at [dstocker@renewfinancial.com](dstocker@renewfinancial.com) if you have any questions.
+1. Open the folder in your downloaded location
+1. run `npm install` to double check that all dependencies are present
+1. Use the same command as aove to get the local server running
 
-## Submission Instructions
+##Tools Used
 
-1. Create a git repository.
-1. Complete the project as described below within your local repository.
-1. Create a .zip file with the contents of the your local repository (including hidden files & folders).
-1. Email the .zip file to [dstocker@renewfinancial.com](dstocker@renewfinancial.com), and put the position you are applying for in the email's subject.
+The following tools were used to create this project
+- React
+- Webpack
+- Babel
+- Enzyme
+- Mocha
+- Lodash
+- Moment
+- React Day Picker
+- React-JsonSchema-Form
+- LucidUI
+- Bootstrap
+- Google Maps APIs
+- sunrise-sunset API *http://sunrise-sunset.org/api*
 
-If you have any questions about this submission process, feel free to email us.
+##Usage Instructions
 
-## Project Description
+You should be able to run this project right out of the blocks. Here's how the flow should work:
 
-Renewable Funding has decided to enter the lucrative market of apparent-solar-time analysis.
+1. Enter a valid address in the first form and press "Submit"
+1. You will then get a valid Latitude/Longitude location.
+1. Then, select a range of dates from the calendar. Once selected, submit the range of dates.
+1. The application will then output a table in UTC time of the various stats about the location, and the timezone will be displayed above the table.
 
-It's a no brainer given the availability of APIs like these:
+For testing:
+1. in the folder directory, run the command `npm test` to see unit testing results.
 
-* http://sunrise-sunset.org/api
-* https://developers.google.com/maps/documentation/geocoding/#geocoding
-* https://developers.google.com/maps/documentation/timezone/intro
+##Known Bugs
 
-We want a user to be able to use our site as follows:
-
-1. Enter an address and a date range
-  1. Range of dates should default to the past seven days.
-  1. Range of dates should not exceed 14 days.
-1. See table-like presentation of sunrise time, sunset time, rfNauticalAfternoon, and day length where each row represents one day in the requested range.
-  1. The table should be sorted by date with the most recent days on top.
-  1. The times should reflect the time zone in which the address is located.
-  1. rfNauticalAfternoon has been defined by our business people as the time elapsed from solar noon until the end of nautical twilight.
-
-#### Bonus options:
-
-If you're feeling inspired, bonus points for:
-
-* enabling a user to save settings for the table view (e.g. a specific date range) with a url that can be linked to and display these settings.
-
-## Evaluation
-
-Reviewers will assess your familiarity with standard libraries and single-page app best practices.
-
-1. Did your application fulfill the requirements?
-1. Did you document the method for setting up and running your application (including versions for software that needs to be installed)?
-1. Did you follow the instructions for submission?
-1. Did your submission include test coverage?
-1. Did you adhere to idiomatic javascript & conventional code patterns for the tools/frameworks that you used?
+- Currently the only way to verify valid address submissions are through the API response, so Google will estimate the location for the user
+- Timezone adjustments are not made in the displayed table, but timezone is declared at the top of the component.
