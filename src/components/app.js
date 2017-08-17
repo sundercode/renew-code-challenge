@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Panel} from "lucid-ui";
 import '../../node_modules/lucid-ui/dist/index.css'; //add webpack loader
+import '../styles/css/bootstrap.min.css';
 import TimeSelector from "./TimeSelector";
 import AddressForm from "./AddressForm";
 

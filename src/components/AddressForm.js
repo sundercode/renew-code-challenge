@@ -93,7 +93,7 @@ class AddressForm extends Component {
                         onSubmit={this.handleSubmit}
                         uiSchema={uiSchema}
                     />
-                    <p>
+                    <p id="latlong">
                         Latitude: {this.state.geocodeData.results[0].geometry.location.lat},
                         Longitude: {this.state.geocodeData.results[0].geometry.location.lng}
                     </p>
