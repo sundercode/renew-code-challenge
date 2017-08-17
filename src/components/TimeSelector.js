@@ -4,6 +4,7 @@ import _ from 'lodash';
 import DayPicker, {DateUtils} from 'react-day-picker';
 import {Button} from "lucid-ui";
 import DateTable from './DateTable';
+import {lat, lng} from './AddressForm';
 import 'react-day-picker/lib/style.css';
 import '../styles/css/bootstrap.min.css';
 
@@ -17,6 +18,10 @@ const lastWeek = new Date(moment().subtract(7, 'days'));
 const twoWeeks = new Date(moment().add(14, 'days'))
 export let days = [];
 
+const urlForTimeZone = (lat, lng, timestamp) =>
+    `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${timestamp}&key=AIzaSyClW8MQo9G707kp0lwc5Q3YlvVNg66jR1c`
+
+
 function getDaysBetween (start, end) {
     let dates = [];
 
@@ -29,6 +34,12 @@ function getDaysBetween (start, end) {
 
     }
     return dates;
+}
+
+function convertToTimestamps (day) {
+    //format { date: '11-08-17', sunrise: 11, sunset: 11, solar_noon:11, nautical_twilight_end: 11}
+    let newDay = moment(day).unix();
+    return newDay;
 }
 
 class TimeSelector extends Component {
@@ -72,11 +83,29 @@ class TimeSelector extends Component {
         this.setState({
             hasSubmitted: true,
         })
+
+        fetch(urlForTimeZone(lat,lng, convertToTimestamps(days[0])))
+            .then(response => {
+                if (!response.ok) {
+                  throw Error("Network request failed")
+                }
+            return response;
+            })
+            .then(d => d.json())
+            .then(d => {
+                this.setState({
+                  timezoneData: d
+                })
+            }, () => {
+                this.setState({
+                  requestFailed: true
+                })
+            })
     }
 
     render() {
         const { from, to, hasSubmitted } = this.state;
-        if (hasSubmitted) {
+        if (hasSubmitted && this.state.timezoneData) {
             return (
                 <div className="RangeExample">
                     <DayPicker
@@ -90,6 +119,7 @@ class TimeSelector extends Component {
                         To: {to && to.toLocaleDateString('en-US')}
                     </div>
                     <p>All times are currently in UTC.</p>
+                    <p>Local Timezone: {this.state.timezoneData.timeZoneName}</p>
                     <Button onClick={this.handleReset}>Reset Range Select</Button>
                     <DateTable />
                 </div>

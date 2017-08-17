@@ -7,6 +7,7 @@ import {days} from './TimeSelector';
 import '../styles/css/bootstrap.min.css';
 
 let finalDates = [];
+let tableData = [];
 const urlForSunrise = (lat, lng, date) =>
     `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=${date}`
 
@@ -16,12 +17,8 @@ function createTableData (d, sunriseResponse) {
     return _.assign({date: d}, newSunriseResponse);
 }
 
-function convertToTimestamps (dayArr) {
-    let newDays = [];
-    for (var i = 0;i <= dayArr.length; i++){
-        newDays.push(moment(dayArr[i]).unix());
-    }
-    return newDays;
+function convertToMilitary (time) {
+    let newTime = moment(time, "hh:mm A").format("HH:mm");
 }
 
 class DateTable extends Component {
@@ -56,6 +53,9 @@ class DateTable extends Component {
                       requestFailed: true
                     })
                 })
+        }
+        for (var i = 0; i < finalDates.length; i++) {
+            tableData.push(createTableData(days[i], finalDates[i].results));
         }
     }
 

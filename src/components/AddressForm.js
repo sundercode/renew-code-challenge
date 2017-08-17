@@ -3,7 +3,7 @@ import {TextFieldValidated, Button} from 'lucid-ui';
 import Form from 'react-jsonschema-form';
 import '../styles/css/bootstrap.min.css';
 
-//google maps/timezone/geocoding api key AIzaSyClW8MQo9G707kp0lwc5Q3YlvVNg66jR1c
+//google maps/timezone/geocoding api key
 const schema = {
     title: "",
     type: "object",
