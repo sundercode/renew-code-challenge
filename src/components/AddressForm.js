@@ -57,7 +57,7 @@ class AddressForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit = dt => {
+    handleSubmit (dt) {
         const addressString = dt.formData.address + ",+"+ dt.formData.city + ",+"+ dt.formData.state;
         this.setState({
             hasSubmitted: true,
