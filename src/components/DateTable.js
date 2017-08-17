@@ -54,9 +54,6 @@ class DateTable extends Component {
                     })
                 })
         }
-        for (var i = 0; i < finalDates.length; i++) {
-            tableData.push(createTableData(days[i], finalDates[i].results));
-        }
     }
 
     render () {
