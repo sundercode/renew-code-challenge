@@ -34,26 +34,26 @@ class DateTable extends Component {
     //get the inbetween days and call sunset api
     //https://sunrise-sunset.org/api
     componentDidMount() {
-        for (var i = 0; i <= days.length; i++){
-            fetch(urlForSunrise(lat,lng, days[i]))
-                .then(response => {
-                    if (!response.ok) {
-                      throw Error("Network request failed")
-                    }
-                return response;
-                })
-                .then(d => d.json())
-                .then(d => {
-                    this.setState({
-                      sunriseData: d
-                    })
-                    finalDates.push(d)
-                }, () => {
-                    this.setState({
-                      requestFailed: true
-                    })
-                })
-        }
+      for (var i = 0; i <= days.length; i++){
+        fetch(urlForSunrise(lat,lng, days[i]))
+          .then(response => {
+              if (!response.ok) {
+                throw Error("Network request failed")
+              }
+          return response;
+          })
+          .then(d => d.json())
+          .then(d => {
+              this.setState({
+                sunriseData: d
+              })
+              finalDates.push(d)
+          }, () => {
+              this.setState({
+                requestFailed: true
+              })
+          })
+      }
     }
 
     render () {

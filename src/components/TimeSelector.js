@@ -127,21 +127,21 @@ class TimeSelector extends Component {
         }
         else {
             return (
-                <div className="RangeExample">
-                    <DayPicker
-                        numberOfMonths={2}
-                        selectedDays={[from, {from, to}]}
-                        onDayClick={this.handleSelectDate}
-                        fixedWeeks
-                    />
-                    <div>
-                        From: {from && from.toLocaleDateString('en-US')},
-                        To: {to && to.toLocaleDateString('en-US')}
-                    </div>
-                    <Button onClick={this.handleReset}>Reset Range Select</Button>
-                    <Button onClick={this.handleClick}> Submit </Button>
-                    <p>Please be sure to limit requests to 14 days. Waiting for submission...</p>
-                </div>
+              <div className="RangeExample">
+                  <DayPicker
+                      numberOfMonths={2}
+                      selectedDays={[from, {from, to}]}
+                      onDayClick={this.handleSelectDate}
+                      fixedWeeks
+                  />
+                  <div>
+                      From: {from && from.toLocaleDateString('en-US')},
+                      To: {to && to.toLocaleDateString('en-US')}
+                  </div>
+                  <Button onClick={this.handleReset}>Reset Range Select</Button>
+                  <Button onClick={this.handleClick}> Submit </Button>
+                  <p>Please be sure to limit requests to 14 days. Waiting for submission...</p>
+              </div>
             );
         }
     }
